@@ -58,7 +58,7 @@ const Market: React.FC<MarketProps> = ({ data }) => {
   // Handler to download the catalog
   const getBase64Image = async (imgUrl: string): Promise<string> => {
     return new Promise((resolve, reject) => {
-      const img = new Image();
+      const img = new (window as any).Image();
       img.crossOrigin = 'Anonymous';
       img.onload = () => {
         console.log("Image loaded successfully: ", imgUrl); // Log success
@@ -74,7 +74,7 @@ const Market: React.FC<MarketProps> = ({ data }) => {
           reject("Failed to get drawing context.");
         }
       };
-      img.onerror = error => {
+      img.onerror = (error: any) => {
         console.error("Error loading image: ", imgUrl, error); // Log errors
         reject(error);
       };
